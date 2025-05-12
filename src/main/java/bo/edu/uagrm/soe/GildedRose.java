@@ -2,6 +2,12 @@ package bo.edu.uagrm.soe;
 
 import java.util.List;
 
+import bo.edu.uagrm.soe.interfaces.QualityUpdaterStrategy;
+import bo.edu.uagrm.soe.quality_updaters.BackstagePassUpdaterStrategy;
+import bo.edu.uagrm.soe.quality_updaters.ConjuredUpdaterStrategy;
+import bo.edu.uagrm.soe.quality_updaters.DefaultUpdaterStrategy;
+import bo.edu.uagrm.soe.quality_updaters.LegendaryUpdaterStrategy;
+
 public class GildedRose {
 
     public static List<Item> items = null;
@@ -23,6 +29,28 @@ public class GildedRose {
     }
 
     public static void updateQuality() {
+    for (Item item : items) {
+      QualityUpdaterStrategy updater = createQualityUpdaterStrategy(item);
+      updater.update();
+    }
+  }
+
+  public static QualityUpdaterStrategy createQualityUpdaterStrategy(Item item) {
+    switch (item.getName()) {
+      case "Aged Brie":
+        return new BackstagePassUpdaterStrategy(item);
+      case "Backstage passes to a TAFKAL80ETC concert":
+        return new BackstagePassUpdaterStrategy(item);
+      case "Sulfuras, Hand of Ragnaros":
+        return new LegendaryUpdaterStrategy(item);
+      case "Conjured Mana Cake":
+        return new ConjuredUpdaterStrategy(item);
+      default:
+        return new DefaultUpdaterStrategy(item);
+    }
+  }
+
+    /* public static void updateQuality() {
         for (int i = 0; i < items.size(); i++) {
             if ((!"Aged Brie".equals(items.get(i).getName()))
                     && !"Backstage passes to a TAFKAL80ETC concert".equals(items.get(i).getName())) {
@@ -82,5 +110,5 @@ public class GildedRose {
                 }
             }
         }
-    }
+    } */
 }
