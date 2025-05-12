@@ -1,5 +1,6 @@
 package bo.edu.uagrm.soe;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import bo.edu.uagrm.soe.interfaces.QualityUpdaterStrategy;
@@ -10,7 +11,7 @@ import bo.edu.uagrm.soe.quality_updaters.LegendaryUpdaterStrategy;
 
 public class GildedRose {
 
-    public static List<Item> items = null;
+    public static List<Item> items =  new ArrayList<>();
 
     public static void main(String[] args) {
 
